@@ -78,54 +78,74 @@ data["DATE"] = pd.to_datetime(data["DATE"]).dt.date
 
 
 
-    # 3) Create Histograms to show temperature distribution in Senegal between [1980,2000] and [2000,2023] (in the same figure). Describe the obtained results.
-data_senegal = data[(data["COUNTRY"] == "Senegal") & (pd.to_datetime(data["DATE"]).dt.year <= 2000)]
-data_senegal1 = data_senegal[["TAVG", "TMAX", "TMIN", "DATE"]].groupby("DATE").mean().reset_index()
+#     # 3) Create Histograms to show temperature distribution in Senegal between [1980,2000] and [2000,2023] (in the same figure). Describe the obtained results.
+# data_senegal = data[(data["COUNTRY"] == "Senegal") & (pd.to_datetime(data["DATE"]).dt.year <= 2000)]
+# data_senegal1 = data_senegal[["TAVG", "TMAX", "TMIN", "DATE"]].groupby("DATE").mean().reset_index()
 
-data_senegal2 = data[(data["COUNTRY"] == "Senegal") & (pd.to_datetime(data["DATE"]).dt.year >= 2000)]
-data_senegal3 = data_senegal2[["TAVG", "TMAX", "TMIN", "DATE"]].groupby("DATE").mean().reset_index()
+# data_senegal2 = data[(data["COUNTRY"] == "Senegal") & (pd.to_datetime(data["DATE"]).dt.year >= 2000)]
+# data_senegal3 = data_senegal2[["TAVG", "TMAX", "TMIN", "DATE"]].groupby("DATE").mean().reset_index()
 
-descriptive_statistics_senegal_1980to2000 = data_senegal1.describe()
-descriptive_statistics_senegal_2000to2023 = data_senegal3.describe()
+# descriptive_statistics_senegal_1980to2000 = data_senegal1.describe()
+# descriptive_statistics_senegal_2000to2023 = data_senegal3.describe()
+
+#         # GRAPH
+#         # - Histogram of distribution of temperature in Senegal between (1980 & 2000) and (2000 & 2023)
+# plt.figure(figsize = (50, 20))
+# plt.subplot(231)
+# plt.title("Histogram of average temperature distribution in Senegal (1980 & 2000)")
+# plt.hist(x = data_senegal1["TAVG"], bins = 10,)
+# plt.xlabel("Bins", labelpad = 20)
+# plt.ylabel("Average Temperature", labelpad = 20)
+
+# plt.subplot(232)
+# plt.title("Histogram of maximum temperature distribution in Senegal (1980 & 2000)")
+# plt.hist(x = data_senegal1["TMAX"], bins = 10,)
+# plt.xlabel("Bins", labelpad = 20)
+# plt.ylabel("Maximum Temperature", labelpad = 20)
+
+# plt.subplot(233)
+# plt.title("Histogram of minimum temperature distribution in Senegal (1980 & 2000)")
+# plt.hist(x = data_senegal1["TMIN"], bins = 10,)
+# plt.xlabel("Bins", labelpad = 20)
+# plt.ylabel("Minimum Temperature", labelpad = 20)
+
+# plt.subplot(234)
+# plt.title("Histogram of average temperature distribution in Senegal (2000 & 2023)")
+# plt.hist(x = data_senegal3["TAVG"], bins = 10,)
+# plt.xlabel("Bins", labelpad = 20)
+# plt.ylabel("Average Temperature", labelpad = 20)
+
+# plt.subplot(235)
+# plt.title("Histogram of maximum temperature distribution in Senegal (2000 & 2023)")
+# plt.hist(x = data_senegal3["TMAX"], bins = 10,)
+# plt.xlabel("Bins", labelpad = 20)
+# plt.ylabel("Maximum Temperature", labelpad = 20)
+
+# plt.subplot(236)
+# plt.title("Histogram of minimum temperature distribution in Senegal (2000 & 2023)")
+# plt.hist(x = data_senegal3["TMIN"], bins = 10,)
+# plt.xlabel("Bins", labelpad = 20)
+# plt.ylabel("Minimum Temperature", labelpad = 20)
+
+# plt.tight_layout()
+# plt.show()
+
+# # ----> YOUR TASK: Describe the results
+
+
+
+    # 4) Select the best chart to show the Average temperature per country.
+tunisia_data = data[data["COUNTRY"] == "Tunisia"]
+senegal_data = data[data["COUNTRY"] == "Senegal"]
+cameroon_data = data[data["COUNTRY"] == "Cameroon"]
+
+grouped_tunisia = tunisia_data[["DATE", "TAVG", "COUNTRY"]].groupby("DATE").mean().reset_index()
+grouped_senegal = senegal_data[["DATE", "TAVG", "COUNTRY"]].groupby("DATE").mean().reset_index()
+grouped_cameroon = cameroon_data[["DATE", "TAVG", "COUNTRY"]].groupby("DATE").mean().reset_index()
 
         # GRAPH
-        # - Histogram of distribution of temperature in Senegal between (1980 & 2000) and (2000 & 2023)
-plt.figure(figsize = (50, 20))
-plt.subplot(231)
-plt.title("Histogram of average temperature distribution in Senegal (1980 & 2000)")
-plt.hist(x = data_senegal1["TAVG"], bins = 10,)
-plt.xlabel("Bins", labelpad = 20)
-plt.ylabel("Average Temperature", labelpad = 20)
-
-plt.subplot(232)
-plt.title("Histogram of maximum temperature distribution in Senegal (1980 & 2000)")
-plt.hist(x = data_senegal1["TMAX"], bins = 10,)
-plt.xlabel("Bins", labelpad = 20)
-plt.ylabel("Maximum Temperature", labelpad = 20)
-
-plt.subplot(233)
-plt.title("Histogram of minimum temperature distribution in Senegal (1980 & 2000)")
-plt.hist(x = data_senegal1["TMIN"], bins = 10,)
-plt.xlabel("Bins", labelpad = 20)
-plt.ylabel("Minimum Temperature", labelpad = 20)
-
-plt.subplot(234)
-plt.title("Histogram of average temperature distribution in Senegal (2000 & 2023)")
-plt.hist(x = data_senegal3["TAVG"], bins = 10,)
-plt.xlabel("Bins", labelpad = 20)
-plt.ylabel("Average Temperature", labelpad = 20)
-
-plt.subplot(235)
-plt.title("Histogram of maximum temperature distribution in Senegal (2000 & 2023)")
-plt.hist(x = data_senegal3["TMAX"], bins = 10,)
-plt.xlabel("Bins", labelpad = 20)
-plt.ylabel("Maximum Temperature", labelpad = 20)
-
-plt.subplot(236)
-plt.title("Histogram of minimum temperature distribution in Senegal (2000 & 2023)")
-plt.hist(x = data_senegal3["TMIN"], bins = 10,)
-plt.xlabel("Bins", labelpad = 20)
-plt.ylabel("Minimum Temperature", labelpad = 20)
-
-plt.tight_layout()
+plt.figure(figsize = (15, 10))
+plt.plot(grouped_tunisia["DATE"], grouped_tunisia["TAVG"])
+plt.plot(grouped_senegal["DATE"], grouped_senegal["TAVG"])
+plt.plot(grouped_cameroon["DATE"], grouped_cameroon["TAVG"])
 plt.show()
